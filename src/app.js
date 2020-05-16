@@ -3,6 +3,7 @@ const express = require('express');
 // Optimizer/security middleware
 const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
 const xss = require('xss-clean');
 const compression = require('compression');
 
@@ -15,6 +16,9 @@ app.enable('trust proxy');
 
 // For static file serving
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Security HTTP Headers
+app.use(helmet());
 
 // Rate limiter
 app.use(
